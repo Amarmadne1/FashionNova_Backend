@@ -17,13 +17,7 @@ public class UserServiceImplementation implements UserService {
 	private UserRepository userRepository;
 	@Autowired
 	private JwtTokenProvider jwtTokenProvider;
-	
-//	public UserServiceImplementation(UserRepository userRepository,JwtTokenProvider jwtTokenProvider) {
-//
-//		this.userRepository=userRepository;
-//		this.jwtTokenProvider=jwtTokenProvider;
-//
-//	}
+
 
 	@Override
 	public User findUserById(Long userId) throws UserException {

@@ -12,30 +12,30 @@ import jakarta.persistence.ManyToOne;
 
 @Entity
 public class CartItem {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@JsonIgnore
 	@ManyToOne
 	private Cart cart;
-	
+
 	@ManyToOne
 	private Product product;
-	
+
 	private String size;
-	
+
 	private int quantity;
-	
+
 	private Integer price;
-	
+
 	private Integer discountedPrice;
-	
+
 	private Long userId;
-	
+
 	public CartItem() {
-		
+
 	}
 
 	public CartItem(Long id, Cart cart, Product product, String size, int quantity, Integer price, Long userId) {
@@ -113,7 +113,7 @@ public class CartItem {
 		this.quantity = quantity;
 	}
 
-	
+
 
 	@Override
 	public int hashCode() {
@@ -132,6 +132,6 @@ public class CartItem {
 		return Objects.equals(id, other.id) && Double.doubleToLongBits(price) == Double.doubleToLongBits(other.price)
 				&& Objects.equals(product, other.product) && Objects.equals(size, other.size);
 	}
-	
-	
+
+
 }
