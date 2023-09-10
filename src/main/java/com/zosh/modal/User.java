@@ -23,59 +23,64 @@ import jakarta.persistence.Table;
 @Table(name = "users")
 public class User {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @Column(name = "first_name")
-    private String firstName;
-    
-    @Column(name = "last_name")
-    private String lastName;
+	@Column(name = "first_name")
+	private String firstName;
 
-    @Column(name = "password")
-    private String password;
+	@Column(name = "last_name")
+	private String lastName;
 
-    @Column(name = "email")
-    private String email;
-    
-    private UserRole role;
-    
-    private String mobile;
+	@Column(name = "password")
+	private String password;
 
-    
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Address> addresses=new ArrayList<>();
+	@Column(name = "email")
+	private String email;
 
-    @Embedded
-    @ElementCollection
-    @CollectionTable(name="payment_information",joinColumns = @JoinColumn(name="user_id"))
-    private List<PaymentInformation> paymentInformation=new ArrayList<>();
+	@Column(name = "Roles")
+	private String role;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,orphanRemoval = true)
-    private List<Rating>ratings=new ArrayList<>();
-    
-    @JsonIgnore
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,orphanRemoval = true)
-    private List<Review>reviews=new ArrayList<>();
-    
-    private LocalDateTime createdAt;
-    
-    public User() {
-		
+	private String mobile;
+
+
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Address> addresses=new ArrayList<>();
+
+	@Embedded
+	@ElementCollection
+	@CollectionTable(name="payment_information",joinColumns = @JoinColumn(name="user_id"))
+	private List<PaymentInformation> paymentInformation=new ArrayList<>();
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 
-	public User(Long id, String firstName, String lastName, String password, String email, UserRole role, String mobile,
-			List<Address> addresses, List<PaymentInformation> paymentInformation, List<Rating> ratings,
-			List<Review> reviews, LocalDateTime createdAt) {
+	@JsonIgnore
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL,orphanRemoval = true)
+	private List<Rating>ratings=new ArrayList<>();
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL,orphanRemoval = true)
+	private List<Review>reviews=new ArrayList<>();
+
+	private LocalDateTime createdAt;
+
+	public User() {
+
+	}
+
+	public User(Long id, String firstName, String lastName, String password, String email, String role, String mobile,
+				List<Address> addresses, List<PaymentInformation> paymentInformation, List<Rating> ratings,
+				List<Review> reviews, LocalDateTime createdAt) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.password = password;
 		this.email = email;
-		this.role = role;
+		this.role=role;
 		this.mobile = mobile;
 		this.addresses = addresses;
 		this.paymentInformation = paymentInformation;
@@ -148,13 +153,10 @@ public class User {
 		this.email = email;
 	}
 
-	public UserRole getRole() {
+	public String getRole() {
 		return role;
 	}
 
-	public void setRole(UserRole role) {
-		this.role = role;
-	}
 
 	public String getMobile() {
 		return mobile;
@@ -179,5 +181,5 @@ public class User {
 	public void setPaymentInformation(List<PaymentInformation> paymentInformation) {
 		this.paymentInformation = paymentInformation;
 	}
-    
+
 }

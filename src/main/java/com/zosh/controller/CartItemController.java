@@ -52,4 +52,18 @@ public class CartItemController {
 		
 		return new ResponseEntity<>(updatedCartItem,HttpStatus.ACCEPTED);
 	}
+
+	@DeleteMapping("/emptycart")
+
+	public ResponseEntity<ApiResponse> emptyCartHandler(@RequestHeader("Authorization") String jwt) throws UserException {
+
+		User user = userService.findUserProfileByJwt(jwt);
+
+		cartItemService.emptyCart(user.getId());
+
+		ApiResponse res = new ApiResponse("Cart is now empty", true);
+
+		return new ResponseEntity<>(res, HttpStatus.ACCEPTED);
+
+	}
 }
